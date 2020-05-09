@@ -57,31 +57,34 @@
 ;; My additions
 ;;;;;;;;;;;;;;;;;
 
-;; Using a non-bash shell can cause projectile to be quite slow. NVM could be
-;; the culprit; see https://github.com/syl20bnr/spacemacs/issues/4207
+;; Using a non-bash shell can cause projectile to be quite slow. NVM could be the
+;; culprit; see https://github.com/syl20bnr/spacemacs/issues/4207
 (setq shell-file-name "/bin/bash")
-;; It might even be worth it to use sh instead, although bash seems to solve the
-;; problem for now.
+;; It might even be worth it to use sh instead, although bash seems to solve the problem
+;; for now.
 ;; (setq shell-file-name "/bin/sh")
 
-;; Make column filling a little less narrow (default is 80). The python
-;; formatter black uses 88 (a 10% increase) which seems reasonable.
+;; Make column filling a little less narrow (default is 80). The python formatter black
+;; uses 88 (a 10% increase) which seems reasonable.
 (setq-default fill-column 88)
 
 ;; The default delay for which-key is a full second. This must be set *before*
 ;; which-key is activated.
 (setq which-key-idle-delay 0.5)
 
-;; Try to get flycheck to check more aggressively, as it tends to quit after
-;; file save when using LSP.
-;; Likely related to https://github.com/hlissner/doom-emacs/issues/2060.
-;; This includes all possible events, and by itself does not solve the problem.
-;; NOTE: These approaches did not work. For possible workarounds see:
-;; https://github.com/emacs-lsp/lsp-mode/issues/1476
-;; (after! flycheck
-;;   (setq flycheck-check-syntax-automatically
-;;         ;; '(save idle-change idle-buffer-switch new-line mode-enabled )))
-;;         nil))
-;; (after! lsp-ui
-;;   ;; (setq lsp-prefer-flymake :none))
-;;   (setq lsp-diagnostic-package :flycheck))
+;; The company-lsp backend is no longer recommended. see:
+;; https://github.com/hlissner/doom-emacs/issues/2589
+
+;; Add some shortcuts for using lsp-treemacs
+(use-package! lsp-treemacs
+  :config
+  (map! :map lsp-command-map
+        "gs" #'lsp-treemacs-symbols
+        ;; "gr" is mapped to lsp-find-reference; this is probably similar but uses
+        ;; treemacs interface.
+        "gR" #'lsp-treemacs-references
+        ;; There are more shortcuts useful in other languages (particularly Java)
+        )
+  ;; set sync mode on by default
+  (lsp-treemacs-sync-mode 1)
+  )

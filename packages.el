@@ -46,8 +46,6 @@
 ;; our package manager can't deal with; see raxod502/straight.el#279)
 ;(package! builtin-package :recipe (:branch "develop"))
 
-;; Allow company to use the LSP backend.
-(package! company-lsp)
 ;; Use the treemacs interface for some nifty LSP features.
 ;; https://github.com/hlissner/doom-emacs/issues/2809
 (package! lsp-treemacs)
