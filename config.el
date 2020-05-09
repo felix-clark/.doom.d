@@ -77,6 +77,7 @@
 
 ;; Add some shortcuts for using lsp-treemacs
 (use-package! lsp-treemacs
+  :after (lsp-mode treemacs)
   :config
   (map! :map lsp-command-map
         "gs" #'lsp-treemacs-symbols
@@ -87,4 +88,8 @@
         )
   ;; set sync mode on by default
   (lsp-treemacs-sync-mode 1)
+  ;; workaround for extra spaces in lsp-treemacs-symbols list, which was supposedly
+  ;; fixed in https://github.com/syl20bnr/spacemacs/issues/12880 but still persists. It
+  ;; may be able to be removed eventually.
+  (setq-hook! lsp-treemacs-generic-mode treemacs-space-between-root-nodes nil)
   )
