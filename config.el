@@ -82,7 +82,7 @@
   (map! :map lsp-command-map
         "gs" #'lsp-treemacs-symbols
         ;; "gr" is mapped to lsp-find-reference; this is probably similar but uses
-        ;; treemacs interface.
+        ;; treemacs interface. "Gr" uses the peak interface.
         "gR" #'lsp-treemacs-references
         ;; There are more shortcuts useful in other languages (particularly Java)
         )
@@ -92,4 +92,28 @@
   ;; fixed in https://github.com/syl20bnr/spacemacs/issues/12880 but still persists. It
   ;; may be able to be removed eventually.
   (setq-hook! lsp-treemacs-generic-mode treemacs-space-between-root-nodes nil)
+  )
+
+(after! lsp-ui
+  ;; Turn off the sidebar for lsp-ui as the company childframe is preferred.
+  (setq lsp-ui-sideline-enable nil)
+  ;; enable normal vim/evil keys for navigating ui-peek menu
+  (map! :map lsp-ui-peek-mode-map
+        ;; "j" #'lsp-ui-peek--select-next
+        ;; "k" #'lsp-ui-peek--select-prev
+        "C-j" #'lsp-ui-peek--select-next
+        "C-k" #'lsp-ui-peek--select-prev)
+)
+
+;; Use rust-analyzer over RLS.
+(after! lsp-rust
+  (if (executable-find "rust-analyzer")
+      ;; For some reason it's the rustic-lsp-server that needs to be set. See:
+      ;; https://github.com/hlissner/doom-emacs/issues/2195
+      (progn
+        (setq rustic-lsp-server 'rust-analyzer)
+        ;; This one might not be necessary:
+        ;; (setq lsp-rust-server 'rust-analyzer)
+      )
+    )
   )
