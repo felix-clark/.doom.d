@@ -53,3 +53,7 @@
 ;; debug adapter protocol is included in doom (with debugger feature) but doesn't have
 ;; keybindings yet.
 ;; https://github.com/hlissner/doom-emacs/issues/2808
+
+;; Consider org-present to turn org notes into slides. This enables a command
+;; org-present to view the current org document as slides. Keybind this command if used.
+;; (package! org-present)
