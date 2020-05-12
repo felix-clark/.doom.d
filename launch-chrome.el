@@ -1,8 +1,9 @@
 ;;; launch-chrome.el --- DAP launch configuration for chrome
 
 ;;; Commentary:
-;;; This template can be dropped into the root of a js/ts application. As of now it must
-;;; be in root to resolve default-directory.
+;;; This template can be dropped into the root of a js/ts application, where it can be
+;;; executed with "SPC m e b". As of now it must be in root to resolve
+;;; default-directory.
 
 ;;; Code:
 
