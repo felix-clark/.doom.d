@@ -75,6 +75,11 @@
 ;; The company-lsp backend is no longer recommended. see:
 ;; https://github.com/hlissner/doom-emacs/issues/2589
 
+;; TODO: There are some difficulties activating a pipenv from a subdirectory. The pipenv.el
+;; package is no longer maintained, but it seems to be a known issue.
+;; This might be able to be worked around by setting python-shell-virtualenv-root ,
+;; perhaps on projectile load.
+
 ;; Add some shortcuts for using lsp-treemacs
 (use-package! lsp-treemacs
   :after (lsp-mode treemacs)
@@ -117,3 +122,64 @@
       )
     )
   )
+
+;; Debugging via DAP works well locally but there is confusion about how to set it up
+;; remotely.
+;; define function for evaluation based on region-mode or not
+;;;###autoload
+  (defun +debugger/dap-eval ()
+    "Evaluate the expression at point or selected region."
+    (interactive)
+    (if (use-region-p)
+        (dap-eval-region)
+      (dap-eval-thing-at-point)))
+;; Set some keybindings for debugging. See:
+;; https://github.com/hlissner/doom-emacs/issues/2808
+(map! :map dap-mode-map
+      :leader
+      ;; These should follow the dap-hydra. Not sure how to engage it directly.
+      ;; This could also be incorporated into a custom hydra; we just want to add "d" to
+      ;; start the debugging.
+      ;; (:map :desc "debug" "d" #'dap-hydra
+      ;; (:desc "debug" "d" #'dap-hydra
+      ;; (:desc "debug" "d" (lambda () (call-interactively #'dap-hydra))
+      (:prefix-map ("d" . "debugger")
+       :desc "Debug" "d" #'dap-debug
+       :desc "Continue" "c" #'dap-continue
+       :desc "Next" "n" #'dap-next
+       :desc "Step in" "i" #'dap-step-in
+       :desc "Step out" "o" #'dap-step-out
+       :desc "Disconnect" "Q" #'dap-disconnect
+       :desc "Restart frame" "r" #'dap-restart-frame
+       :desc "Evaluate" "e" #'+debugger/dap-eval
+       (:prefix ("b" . "breakpoint")
+        :desc "Toggle breakpoint" "b" #'dap-breakpoint-toggle
+        :desc "Add breakpoint" "a" #'dap-breakpoint-add
+        :desc "Delete breakpoint" "d" #'dap-breakpoint-delete
+        :desc "Delete all breakpoints" "D" #'dap-breakpoint-delete-all
+        :desc "Set/unset breakpoint condition" "c" #'dap-breakpoint-condition
+        :desc "Set/unset breakpoint hit condition" "h" #'dap-breakpoint-hit-condition
+        :desc "Set log message" "l" #'dap-breakpoint-log-message
+        )
+       ;; Consider moving these to the "s" prefix to match the hydra. There are other
+       ;; switching functions in there too.
+       (:prefix ("l" . "list")
+        :desc "List locals" "l" #'dap-ui-locals
+        :desc "List breakpoints" "b" #'dap-ui-breakpoints
+        :desc "List sessions" "s" #'dap-ui-sessions
+        )
+       )
+      )
+;; See https://github.com/emacs-lsp/dap-mode#Usage for instructions on how to
+;; automatically engage a hydra on a breakpoint.
+(add-hook 'dap-stopped-hook
+          (lambda (arg) (call-interactively #'dap-hydra)))
+
+;; NOTE: need to run (dap-chrome-setup) once for chrome debugging. It doesn't appear
+;; expensive when already downloaded, so it might make sense to include it here, along
+;; with dap-firefox-setup, dap-node-setup, and dap-gdb-lldp-setup.
+;; Perhaps this should be achieved by running (dap-chrome-setup) if
+;; dap-chrome-debug-program does not exist.
+
+;; TODO: For using the angular language server see:
+;; https://github.com/emacs-lsp/lsp-mode/wiki/Install-Angular-Language-server
