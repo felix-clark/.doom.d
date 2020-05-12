@@ -3,6 +3,7 @@
 ;;; Commentary:
 ;;; Drop this in the root of a containerized application and edit the directories below.
 ;;; Open and execute it with "SPC m e b".
+;;; See https://github.com/emacs-lsp/dap-mode/issues/155
 
 ;;; Code:
 
