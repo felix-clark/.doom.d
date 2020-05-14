@@ -172,14 +172,25 @@
       )
 ;; See https://github.com/emacs-lsp/dap-mode#Usage for instructions on how to
 ;; automatically engage a hydra on a breakpoint.
-(add-hook 'dap-stopped-hook
-          (lambda (arg) (call-interactively #'dap-hydra)))
+;; This feels somewhat invasive for web debugging.
+;; (add-hook 'dap-stopped-hook
+;;           (lambda (arg) (call-interactively #'dap-hydra)))
 
-;; NOTE: need to run (dap-chrome-setup) once for chrome debugging. It doesn't appear
-;; expensive when already downloaded, so it might make sense to include it here, along
-;; with dap-firefox-setup, dap-node-setup, and dap-gdb-lldp-setup.
-;; Perhaps this should be achieved by running (dap-chrome-setup) if
-;; dap-chrome-debug-program does not exist.
+;; setup web debuggers when their corresponding packages are loaded.
+(after! dap-node
+  (unless (file-exists-p (car (last dap-node-debug-program)))
+    (dap-node-setup)))
+(after! dap-gdb-lldb
+  (unless (file-exists-p (car (last dap-gdb-lldb-debug-program)))
+    (dap-gdb-lldb-setup)))
+(after! dap-chrome
+  (unless (file-exists-p (car (last dap-chrome-debug-program)))
+    (dap-chrome-setup)))
+(after! dap-firefox
+  (unless (file-exists-p (car (last dap-firefox-debug-program)))
+    (dap-firefox-setup)))
 
 ;; TODO: For using the angular language server see:
 ;; https://github.com/emacs-lsp/lsp-mode/wiki/Install-Angular-Language-server
+;; this probably requires angular-mode, as installing the angular language server
+;; appears to remove the typescript LS ? maybe not -- this was probably an environment issue.
