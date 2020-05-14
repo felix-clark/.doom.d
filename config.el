@@ -75,6 +75,11 @@
 ;; The company-lsp backend is no longer recommended. see:
 ;; https://github.com/hlissner/doom-emacs/issues/2589
 
+;; Try using yapf as a formatter
+;; This seems to work but we're using black anyway
+;; (after! format
+;;   (set-formatter! 'yapf "yapf -q" :modes '(python-mode)))
+
 ;; TODO: There are some difficulties activating a pipenv from a subdirectory. The pipenv.el
 ;; package is no longer maintained, but it seems to be a known issue.
 ;; This might be able to be worked around by setting python-shell-virtualenv-root ,
@@ -92,47 +97,47 @@
         ;; There are more shortcuts useful in other languages (particularly Java)
         )
   ;; set sync mode on by default
+  ;; not totally sure what this does. might be causing some minor errors.
   (lsp-treemacs-sync-mode 1)
   ;; workaround for extra spaces in lsp-treemacs-symbols list, which was supposedly
   ;; fixed in https://github.com/syl20bnr/spacemacs/issues/12880 but still persists. It
   ;; may be able to be removed eventually.
-  (setq-hook! lsp-treemacs-generic-mode treemacs-space-between-root-nodes nil)
-  )
+  (setq-hook! lsp-treemacs-generic-mode treemacs-space-between-root-nodes nil))
 
 (after! lsp-ui
   ;; Turn off the sidebar for lsp-ui as the company childframe is preferred.
-  (setq lsp-ui-sideline-enable nil)
+  ;; company childframe (I think) looks malformed so I'll turn that off for now instead
+  ;; (setq lsp-ui-sideline-enable nil)
   ;; enable normal vim/evil keys for navigating ui-peek menu
   (map! :map lsp-ui-peek-mode-map
         ;; "j" #'lsp-ui-peek--select-next
         ;; "k" #'lsp-ui-peek--select-prev
         "C-j" #'lsp-ui-peek--select-next
-        "C-k" #'lsp-ui-peek--select-prev)
-)
+        "C-k" #'lsp-ui-peek--select-prev))
 
 ;; Use rust-analyzer over RLS.
 (after! lsp-rust
   (if (executable-find "rust-analyzer")
       ;; For some reason it's the rustic-lsp-server that needs to be set. See:
       ;; https://github.com/hlissner/doom-emacs/issues/2195
-      (progn
-        (setq rustic-lsp-server 'rust-analyzer)
-        ;; This one might not be necessary:
-        ;; (setq lsp-rust-server 'rust-analyzer)
-      )
-    )
-  )
+      (setq rustic-lsp-server 'rust-analyzer)))
+;; (progn
+;;   (setq rustic-lsp-server 'rust-analyzer)
+;; This one might not be necessary:
+;; (setq lsp-rust-server 'rust-analyzer)
+;; )
+;; ))
 
 ;; Debugging via DAP works well locally but there is confusion about how to set it up
 ;; remotely.
 ;; define function for evaluation based on region-mode or not
 ;;;###autoload
-  (defun +debugger/dap-eval ()
-    "Evaluate the expression at point or selected region."
-    (interactive)
-    (if (use-region-p)
-        (dap-eval-region)
-      (dap-eval-thing-at-point)))
+(defun +debugger/dap-eval ()
+  "Evaluate the expression at point or selected region."
+  (interactive)
+  (if (use-region-p)
+      (dap-eval-region)
+    (dap-eval-thing-at-point)))
 ;; Set some keybindings for debugging. See:
 ;; https://github.com/hlissner/doom-emacs/issues/2808
 (map! :map dap-mode-map
