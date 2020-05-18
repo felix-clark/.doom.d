@@ -7,15 +7,6 @@
 
 ;;; Code:
 
-;; These shouldn't be necessary if https://github.com/hlissner/doom-emacs/issues/3103 is
-;; addressed.
-(require 'dap-mode)
-(require 'dap-chrome)
-(dap-chrome-setup)
-;; dap-chrome-setup needs to be run first to install the ms debugger. We should instead
-;; check if the debugger exists before calling this, in config.el, via
-;; dap-chrome-debug-program.
-
 (dap-register-debug-template "Chrome launch"
   (list :type "chrome"
     :name "Chrome launch"
