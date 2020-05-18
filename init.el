@@ -89,8 +89,10 @@
        direnv
        (docker +lsp)
        editorconfig      ; let someone else argue about tabs vs spaces
-       ;; EIN is causing other issues in unrelated languages, but only in emacs 27?
-       ein               ; tame Jupyter notebooks with emacs
+       ;; EIN is causing other issues in unrelated languages.
+       ;; This bug was supposedly fixed:
+       ;; https://github.com/millejoh/emacs-ipython-notebook/issues/537
+       ;; ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
        ;;gist              ; interacting with github gists
        lookup              ; navigate your code and its documentation
