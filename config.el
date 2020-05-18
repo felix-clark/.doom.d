@@ -97,8 +97,9 @@
         ;; There are more shortcuts useful in other languages (particularly Java)
         )
   ;; set sync mode on by default
-  ;; not totally sure what this does. might be causing some minor errors.
-  (lsp-treemacs-sync-mode 1)
+  ;; not totally sure what this does. might be causing treemacs errors on magit
+  ;; operations.
+  ;; (lsp-treemacs-sync-mode 1)
   ;; workaround for extra spaces in lsp-treemacs-symbols list, which was supposedly
   ;; fixed in https://github.com/syl20bnr/spacemacs/issues/12880 but still persists. It
   ;; may be able to be removed eventually.
