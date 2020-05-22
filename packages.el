@@ -56,4 +56,14 @@
 
 ;; Consider org-present to turn org notes into slides. This enables a command
 ;; org-present to view the current org document as slides. Keybind this command if used.
+;; The features of doom's (:lang org) module should be reviewed; there is probably overlap.
 ;; (package! org-present)
+
+;; Detect node version from .nvmrc.
+;; The version number in the file must be MAJOR.MINOR.BUGFIX (i.e. no "lts/erbium")
+(package! nvm)
+
+;; This must be installed separately as part of mu.
+;; If installed from source/tarball, the target (/usr/local/share/emacs/site-lisp/mu4e)
+;; must be added to the load-path.
+;; (package! mu4e)

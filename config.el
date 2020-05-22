@@ -72,6 +72,10 @@
 ;; which-key is activated.
 (setq which-key-idle-delay 0.5)
 
+;; fish's auto features don't play nice in the terminal emulator
+(after! multi-term
+  (setq multi-term-program "bash"))
+
 ;; The company-lsp backend is no longer recommended. see:
 ;; https://github.com/hlissner/doom-emacs/issues/2589
 
@@ -128,6 +132,15 @@
 ;; (setq lsp-rust-server 'rust-analyzer)
 ;; )
 ;; ))
+
+;; detect nvm version automatically for JS modes
+(use-package! nvm
+  :hook ((js2-mode typescript-mode) . nvm-use-for-buffer))
+
+;; add custom elisp to the load path
+(add-load-path! (expand-file-name "src" default-directory))
+;; Load the email configuration
+(require 'email)
 
 ;; Debugging via DAP works well locally but there is confusion about how to set it up
 ;; remotely.
