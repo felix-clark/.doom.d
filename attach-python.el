@@ -21,7 +21,7 @@
     ;; :secret "debug auth pass phrase"
     ;; This may need tweaking. TRAMP needs the leading /
     :host "/docker:<CONTAINER NAME>"
-    ;; :url "http://localhost:80"
+    ;; perhaps the host should be localhost?
     )
   )
 

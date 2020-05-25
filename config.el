@@ -59,7 +59,7 @@
 
 ;; Using a non-bash shell can cause projectile to be quite slow. NVM could be the
 ;; culprit; see https://github.com/syl20bnr/spacemacs/issues/4207
-(setq shell-file-name "/bin/bash")
+(setq shell-file-name "bash")
 ;; It might even be worth it to use sh instead, although bash seems to solve the problem
 ;; for now.
 ;; (setq shell-file-name "/bin/sh")

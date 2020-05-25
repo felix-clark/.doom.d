@@ -14,6 +14,16 @@
 ;; after encrypting (gpg -r <id> -e .authinfo) make sure the permissions are
 ;; 600 for read/write only for user.
 
+;; `mu init` must be ran with all addresses specified at once:
+;; mu init -v --maildir ~/.mail/ --my-address mfclark3690@gmail.com --my-address venustrapsflies@gmail.com
+
+;; The commands for syncing and indexing are:
+;; mbsync -Va
+;; mu index
+;; The mu4e update method *should* do both of these, but it doesn't appear to re-index.
+;; This can lead to old messages persisting in the database. mu index can be ran
+;; manually.
+
 ;; possibly:
 ;; This should only be relevant for queued email. By default it should send immediately.
 ;; if using smtpmail (defaults to "~/Mail/queue")
@@ -21,17 +31,16 @@
 ;; the queue dir is set now but is not activated.
 
 ;; automatic update interval in seconds can be set with this. nil disables automatic retrieval.
-(setq mu4e-update-interval 180)
+(setq mu4e-update-interval 300)
 
-;; consider mstmp for sending, although this might be outdated.
+;; consider mstmp for sending. This would let me use the same password manager for
+;; sending instead of having the decrypt the .authinfo for additionally sending.
 ;; https://www.ict4g.net/adolfo/notes/emacs/reading-imap-mail-with-emacs.html
+;; https://notanumber.io/2016-10-03/better-email-with-mu4e/
 
-
-;; `mu init` must be ran with all addresses specified at once:
-;; mu init -v --maildir ~/.mail/ --my-address mfclark3690@gmail.com --my-address venustrapsflies@gmail.com
 
 ;; Each path is relative to ~/.mail
-;; This macro sets up a new context
+;; The set-email-account! macro sets up a new context.
 ;; https://www.djcbsoftware.nl/code/mu/mu4e/Contexts-example.html#Contexts-example
 
 
