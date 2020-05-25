@@ -213,3 +213,5 @@
 ;; https://github.com/emacs-lsp/lsp-mode/wiki/Install-Angular-Language-server
 ;; this probably requires angular-mode, as installing the angular language server
 ;; appears to remove the typescript LS ? maybe not -- this was probably an environment issue.
+
+(require 'org-trello)
