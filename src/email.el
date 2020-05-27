@@ -30,8 +30,15 @@
 (setq smtpmail-queue-dir "~/.mail/queue")
 ;; the queue dir is set now but is not activated.
 
-;; automatic update interval in seconds can be set with this. nil disables automatic retrieval.
-(setq mu4e-update-interval 300)
+(after! mu4e
+  (setq-hook! mu4e-main-mode
+    ;; automatic update interval in seconds can be set with this. nil disables automatic retrieval.
+    ;; This can actually be a bit invasive.
+    ;; mu4e-update-interval 300
+    ;; enable re-indexing to clean up
+    mu4e-index-cleanup t)
+  )
+
 
 ;; consider mstmp for sending. This would let me use the same password manager for
 ;; sending instead of having the decrypt the .authinfo for additionally sending.
