@@ -74,7 +74,7 @@
                       ;; The default port of 25 seems to work too, for this account but
                       ;; not all. The SSL port is 465.
                       (smtpmail-smtp-service  . 587)
-                      (mu4e-compose-signature . "Felix Michael Clark, PhD.")
+                      (mu4e-compose-signature . "Sent from my emacs\n\nFelix Michael Clark, PhD.\nmfclark3690@gmail.com")
                       )
                     t) ;; this is the default account
 
