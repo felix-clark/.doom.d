@@ -76,6 +76,10 @@
 (after! multi-term
   (setq multi-term-program "bash"))
 
+;; fix for being unable to find "fd" over tramp
+(after! tramp
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
+
 ;; The company-lsp backend is no longer recommended. see:
 ;; https://github.com/hlissner/doom-emacs/issues/2589
 
