@@ -97,8 +97,9 @@
 (after! lsp-treemacs
   (map! :map lsp-command-map
         "gs" #'lsp-treemacs-symbols
-        ;; "gr" is mapped to lsp-find-reference; this is probably similar but uses
-        ;; treemacs interface. "Gr" uses the peak interface.
+        ;; "gr" is mapped to lsp-find-reference; this is similar but uses treemacs
+        ;; interface to create a new window and persist over nagivation. "Gr" uses the
+        ;; peak interface.
         "gR" #'lsp-treemacs-references
         ;; There are more shortcuts useful in other languages (particularly Java)
         )
