@@ -46,10 +46,6 @@
 ;; our package manager can't deal with; see raxod502/straight.el#279)
 ;(package! builtin-package :recipe (:branch "develop"))
 
-;; Use the treemacs interface for some nifty LSP features.
-;; https://github.com/hlissner/doom-emacs/issues/2809
-(package! lsp-treemacs)
-
 ;; debug adapter protocol is included in doom (with debugger feature) but doesn't have
 ;; keybindings yet.
 ;; https://github.com/hlissner/doom-emacs/issues/2808

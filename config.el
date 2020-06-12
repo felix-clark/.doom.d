@@ -94,9 +94,7 @@
 ;; perhaps on projectile load.
 
 ;; Add some shortcuts for using lsp-treemacs
-(use-package! lsp-treemacs
-  :after (lsp-mode treemacs)
-  :config
+(after! lsp-treemacs
   (map! :map lsp-command-map
         "gs" #'lsp-treemacs-symbols
         ;; "gr" is mapped to lsp-find-reference; this is probably similar but uses
@@ -107,10 +105,12 @@
   ;; set sync mode on by default
   ;; not totally sure what this does. might be causing treemacs errors on magit
   ;; operations.
-  (lsp-treemacs-sync-mode 1)
+  (lsp-treemacs-sync-mode t)
   ;; workaround for extra spaces in lsp-treemacs-symbols list, which was supposedly
   ;; fixed in https://github.com/syl20bnr/spacemacs/issues/12880 but still persists. It
   ;; may be able to be removed eventually.
+  ;; For deeply heirarchical files this isn't so bad, but it looks ugly when the symbols
+  ;; list is flat.
   (setq-hook! lsp-treemacs-generic-mode treemacs-space-between-root-nodes nil))
 
 (after! lsp-ui
