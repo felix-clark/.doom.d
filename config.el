@@ -176,6 +176,8 @@
        :desc "Disconnect" "Q" #'dap-disconnect
        :desc "Restart frame" "r" #'dap-restart-frame
        :desc "Evaluate" "e" #'+debugger/dap-eval
+       ;; consider mapping this to (:leader "d") directly
+       :desc "Hydra" "h" #'dap-hydra
        (:prefix ("b" . "breakpoint")
         :desc "Toggle breakpoint" "b" #'dap-breakpoint-toggle
         :desc "Add breakpoint" "a" #'dap-breakpoint-add
