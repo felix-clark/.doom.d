@@ -2,18 +2,13 @@
 
 ## Building
 
-vterm and jansson are required:
+vterm:
+```
+sudo apt-get install libvterm-dev
+```
 
-```
-sudo apt-get install libvterm-dev libjansson-dev
-```
-The latest pretest of emacs 27 can be acquired from https://alpha.gnu.org/gnu/emacs/pretest/ .
-
-```
-./configure --with-json
-make -j4
-sudo make install
-```
+`doom doctor` will warn about missing `vterm` until it is compiled, which will be done
+automatically upon first using `vterm` (`SPC o t`) within emacs.
 
 ## Troubleshooting
 
