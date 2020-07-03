@@ -77,6 +77,7 @@
   (setq multi-term-program "bash"))
 
 ;; fix for being unable to find "fd" over tramp
+;; Possibly related to and resolve by https://github.com/hlissner/doom-emacs/issues/3425
 (after! tramp
   (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 
