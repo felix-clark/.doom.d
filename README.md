@@ -2,10 +2,11 @@
 
 ## Building
 
-vterm:
+vterm on Ubuntu 20+:
 ```
 sudo apt-get install libvterm-dev
 ```
+It is complicated on Ubuntu 18, and I can't get it to work at the moment.
 
 `doom doctor` will warn about missing `vterm` until it is compiled, which will be done
 automatically upon first using `vterm` (`SPC o t`) within emacs.
