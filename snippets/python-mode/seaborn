@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: seaborn
+# key: sns
+# uuid: sns
+# --
+import seaborn as sns

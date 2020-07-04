@@ -89,6 +89,9 @@
 ;; (after! format
 ;;   (set-formatter! 'yapf "yapf -q" :modes '(python-mode)))
 
+;; Add custom snippets
+(add-to-list 'yas-snippet-dirs "~/.doom.d/snippets")
+
 ;; TODO: There are some difficulties activating a pipenv from a subdirectory. The pipenv.el
 ;; package is no longer maintained, but it seems to be a known issue.
 ;; This might be able to be worked around by setting python-shell-virtualenv-root ,

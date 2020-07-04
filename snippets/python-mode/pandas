@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: pandas
+# key: pd
+# uuid: pd
+# --
+import pandas as pd
