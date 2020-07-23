@@ -92,6 +92,16 @@
 ;; Add custom snippets
 (add-to-list 'yas-snippet-dirs "~/.doom.d/snippets")
 
+;; If delta is installed, configure and use magit-delta mode
+(if (executable-find "delta")
+    (use-package! magit-delta
+      :after magit
+      :config
+      (setq
+        magit-delta-default-dark-theme "OneHalfDark"
+        magit-delta-default-light-theme "OneHalfLight")
+      (magit-delta-mode)))
+
 ;; TODO: There are some difficulties activating a pipenv from a subdirectory. The pipenv.el
 ;; package is no longer maintained, but it seems to be a known issue.
 ;; This might be able to be worked around by setting python-shell-virtualenv-root ,
@@ -132,15 +142,8 @@
 ;; Use rust-analyzer over RLS.
 (after! lsp-rust
   (if (executable-find "rust-analyzer")
-      ;; For some reason it's the rustic-lsp-server that needs to be set. See:
-      ;; https://github.com/hlissner/doom-emacs/issues/2195
+      ;; See: https://github.com/hlissner/doom-emacs/issues/2195
       (setq rustic-lsp-server 'rust-analyzer)))
-;; (progn
-;;   (setq rustic-lsp-server 'rust-analyzer)
-;; This one might not be necessary:
-;; (setq lsp-rust-server 'rust-analyzer)
-;; )
-;; ))
 
 ;; detect nvm version automatically for JS modes
 (use-package! nvm
