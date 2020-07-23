@@ -55,6 +55,10 @@
 ;; The features of doom's (:lang org) module should be reviewed; there is probably overlap.
 ;; (package! org-present)
 
+;; magit-delta for fancier git highlighting.
+;; delta must be installed.
+(package! magit-delta)
+
 ;; Detect node version from .nvmrc.
 ;; The version number in the file must be MAJOR.MINOR.BUGFIX (i.e. no "lts/erbium")
 (package! nvm)
