@@ -98,8 +98,8 @@
       :after magit
       :config
       (setq
-        magit-delta-default-dark-theme "OneHalfDark"
-        magit-delta-default-light-theme "OneHalfLight")
+       magit-delta-default-dark-theme "OneHalfDark"
+       magit-delta-default-light-theme "OneHalfLight")
       (magit-delta-mode)))
 
 ;; TODO: There are some difficulties activating a pipenv from a subdirectory. The pipenv.el
@@ -143,7 +143,13 @@
 (after! lsp-rust
   (if (executable-find "rust-analyzer")
       ;; See: https://github.com/hlissner/doom-emacs/issues/2195
-      (setq rustic-lsp-server 'rust-analyzer)))
+      (setq! rustic-lsp-server 'rust-analyzer
+             ;; use clippy instead of check for detailed suggestions. Use --all-targets
+             ;; so that test code is included.
+             ;; TODO: only use clippy if it is installed. the --all-targets works for
+             ;; "check" as well.
+             lsp-rust-analyzer-cargo-watch-command "clippy"
+             lsp-rust-analyzer-cargo-watch-args ["--all-targets"])))
 
 ;; detect nvm version automatically for JS modes
 (use-package! nvm
