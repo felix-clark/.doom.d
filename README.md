@@ -2,11 +2,15 @@
 
 ## Building
 
+TODO: more complete prerequisite list
+
 vterm on Ubuntu 20+:
 ```
 sudo apt-get install libvterm-dev
 ```
-It is complicated on Ubuntu 18, and I can't get it to work at the moment.
+
+It is complicated on Ubuntu 18, and I can't get it to work at the moment; on an older
+machine replace `vterm` with `term` in `init.el`.
 
 `doom doctor` will warn about missing `vterm` until it is compiled, which will be done
 automatically upon first using `vterm` (`SPC o t`) within emacs.
@@ -31,7 +35,8 @@ Now use
 emacsclient -c
 ```
 
-to attach to the running server and use emacs as normal.
+to attach to the running server and use emacs as normal. To restart the emacs server
+(for instance after running `doom upgrade`), run `systemctl restart --user emacs`.
 
 ## Troubleshooting
 

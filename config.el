@@ -160,61 +160,6 @@
 ;; Load the email configuration
 (require 'email)
 
-;; Debugging via DAP works well locally but there is confusion about how to set it up
-;; remotely.
-;; define function for evaluation based on region-mode or not
-;;;###autoload
-(defun +debugger/dap-eval ()
-  "Evaluate the expression at point or selected region."
-  (interactive)
-  (if (use-region-p)
-      (dap-eval-region)
-    (dap-eval-thing-at-point)))
-;; Set some keybindings for debugging. See:
-;; https://github.com/hlissner/doom-emacs/issues/2808
-(map! :map dap-mode-map
-      :leader
-      ;; These should follow the dap-hydra. Not sure how to engage it directly.
-      ;; This could also be incorporated into a custom hydra; we just want to add "d" to
-      ;; start the debugging.
-      ;; (:map :desc "debug" "d" #'dap-hydra
-      ;; (:desc "debug" "d" #'dap-hydra
-      ;; (:desc "debug" "d" (lambda () (call-interactively #'dap-hydra))
-      (:prefix-map ("d" . "debugger")
-       :desc "Debug" "d" #'dap-debug
-       :desc "Continue" "c" #'dap-continue
-       :desc "Next" "n" #'dap-next
-       :desc "Step in" "i" #'dap-step-in
-       :desc "Step out" "o" #'dap-step-out
-       :desc "Disconnect" "Q" #'dap-disconnect
-       :desc "Restart frame" "r" #'dap-restart-frame
-       :desc "Evaluate" "e" #'+debugger/dap-eval
-       ;; consider mapping this to (:leader "d") directly
-       :desc "Hydra" "h" #'dap-hydra
-       (:prefix ("b" . "breakpoint")
-        :desc "Toggle breakpoint" "b" #'dap-breakpoint-toggle
-        :desc "Add breakpoint" "a" #'dap-breakpoint-add
-        :desc "Delete breakpoint" "d" #'dap-breakpoint-delete
-        :desc "Delete all breakpoints" "D" #'dap-breakpoint-delete-all
-        :desc "Set/unset breakpoint condition" "c" #'dap-breakpoint-condition
-        :desc "Set/unset breakpoint hit condition" "h" #'dap-breakpoint-hit-condition
-        :desc "Set log message" "l" #'dap-breakpoint-log-message
-        )
-       ;; Consider moving these to the "s" prefix to match the hydra. There are other
-       ;; switching functions in there too.
-       (:prefix ("l" . "list")
-        :desc "List locals" "l" #'dap-ui-locals
-        :desc "List breakpoints" "b" #'dap-ui-breakpoints
-        :desc "List sessions" "s" #'dap-ui-sessions
-        )
-       )
-      )
-;; See https://github.com/emacs-lsp/dap-mode#Usage for instructions on how to
-;; automatically engage a hydra on a breakpoint.
-;; This feels somewhat invasive for web debugging.
-;; (add-hook 'dap-stopped-hook
-;;           (lambda (arg) (call-interactively #'dap-hydra)))
-
 ;; setup web debuggers when their corresponding packages are loaded.
 (after! dap-node
   (unless (file-exists-p (car (last dap-node-debug-program)))
@@ -235,3 +180,5 @@
 ;; appears to remove the typescript LS ? maybe not -- this was probably an environment issue.
 
 (require 'trello)
+
+(require 'stats)
