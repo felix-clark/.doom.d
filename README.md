@@ -1,6 +1,18 @@
 # My doom emacs config
 
-## Building
+## Building emacs from source
+
+With emacs 28 providing native compilation, it can be significantly faster when the
+`feature/native-comp` branch is built (which has been merged into emacs master).
+See [this SO
+page](https://emacs.stackexchange.com/questions/59538/compile-emacs-from-feature-native-comp-gccemacs-branch-on-ubuntu)
+for some examples. Ensure that the flag `--with-native-compilation` is set. Native JSON
+support via jansson is also very useful, so make sure those prerequisites are installed
+and detected in the configuration. I recommend using gcc-10, which requires setting
+`CC=gcc-10` before configuration and building. By default, emacs will be installed to
+`/usr/local/`.
+
+## Doom prerequisites
 
 TODO: more complete prerequisite list
 
@@ -19,8 +31,8 @@ automatically upon first using `vterm` (`SPC o t`) within emacs.
 
 Copy (softlink may not work) `emacs.service` into `~/.config/systemd/user`. This file is
 edited from the default version in the emacs master branch as the default "notify" type
-did not work for me. It assumes that emacs is installed as a snap, so the binary paths
-will need to be modified if this is not the case.
+did not work for me. If emacs is installed as a snap or another non-standard location
+the binary paths will need to be specified exactly (i.e. `emacs` -> `/snap/bin/emacs`).
 
 Enable the service and start for the first time with
 
@@ -28,6 +40,7 @@ Enable the service and start for the first time with
 systemctl enable --user emacs
 systemctl start --user emacs
 ```
+If changes are made after this point, be sure to run `systemctl daemon-reload --user` to reload them.
 
 Now use
 
