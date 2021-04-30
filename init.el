@@ -91,7 +91,7 @@
        ;; EIN is causing other issues in unrelated languages.
        ;; This bug was supposedly fixed:
        ;; https://github.com/millejoh/emacs-ipython-notebook/issues/537
-       ;; ein               ; tame Jupyter notebooks with emacs
+       ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
        ;;gist              ; interacting with github gists
        lookup              ; navigate your code and its documentation
