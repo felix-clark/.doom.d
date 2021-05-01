@@ -67,6 +67,3 @@
 ;; If installed from source/tarball, the target (/usr/local/share/emacs/site-lisp/mu4e)
 ;; must be added to the load-path.
 ;; (package! mu4e)
-
-;; try out org-trello integration
-(package! org-trello)
