@@ -80,20 +80,23 @@
 (after! multi-term
   (setq multi-term-program "bash"))
 
-;; supposed to help tramp use bash to get the right environment
+;; supposed to help tramp use bash to get the right environment; not clear that it does
+;; anything.
 (setq explicit-shell-file-name "/bin/bash")
 
 ;; fix for being unable to find "fd" over tramp
 ;; Possibly related to and resolve by https://github.com/hlissner/doom-emacs/issues/3425
 (after! tramp
-  ;; NOTE: These don't appear to have the intended effect. tramp-default-remote-shell is
-  ;; overwritten back to /bin/sh.
-  ;; (setq! tramp-default-remote-shell "/bin/bash")
-  ;; (setq tramp-encoding-shell "/bin/bash")
   ;; NOTE: This causes tramp to open a login shell meaning that per-host customization
   ;; can be done in ~/.profile, according to
   ;; https://emacs.stackexchange.com/questions/7673/how-do-i-make-trampeshell-use-my-environment-customized-in-the-remote-bash-p
-  (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+  ;; NOTE: These don't appear to have the intended effect. tramp-default-remote-shell is
+  ;; overwritten back to /bin/sh.
+  (setq tramp-default-remote-shell "/bin/bash")
+  ;; It's less clear that this should be used
+  (setq tramp-encoding-shell "/bin/bash")
+  )
 
 ;; This appears to do the right thing, but currently we're having other issues with
 ;; tramp commands finding the right path.
