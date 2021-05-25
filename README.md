@@ -16,6 +16,8 @@ and detected in the configuration. I recommend using gcc-10, which requires sett
 
 TODO: more complete prerequisite list
 
+### vterm
+
 vterm on Ubuntu 20+:
 ```
 sudo apt-get install libvterm-dev
@@ -26,6 +28,9 @@ machine replace `vterm` with `term` in `init.el`.
 
 `doom doctor` will warn about missing `vterm` until it is compiled, which will be done
 automatically upon first using `vterm` (`SPC o t`) within emacs.
+
+See [https://github.com/akermu/emacs-libvterm#shell-side-configuration](the readme) for
+instructions on how to configure the shell.
 
 ## Running as a systemd service
 

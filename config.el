@@ -63,6 +63,9 @@
 ;; It might even be worth it to use sh instead, although bash seems to solve the problem
 ;; for now.
 ;; (setq shell-file-name "/bin/sh")
+;; supposed to help tramp use bash to get the right environment; not clear that it does
+;; anything.
+(setq explicit-shell-file-name "/bin/bash")
 
 ;; Make column filling a little less narrow (default is 80). The python formatter black
 ;; uses 88 (a 10% increase) which seems reasonable.
@@ -80,9 +83,10 @@
 (after! multi-term
   (setq multi-term-program "bash"))
 
-;; supposed to help tramp use bash to get the right environment; not clear that it does
-;; anything.
-(setq explicit-shell-file-name "/bin/bash")
+;; make terminal appear on the side rather than the bottom.
+;; To adjust height add ":width <int|float>" to the rule (see documentation).
+(set-popup-rule! "*doom:vterm-popup*" :side 'right)
+
 
 ;; fix for being unable to find "fd" over tramp
 ;; Possibly related to and resolve by https://github.com/hlissner/doom-emacs/issues/3425
@@ -93,10 +97,23 @@
   (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
   ;; NOTE: These don't appear to have the intended effect. tramp-default-remote-shell is
   ;; overwritten back to /bin/sh.
-  (setq tramp-default-remote-shell "/bin/bash")
+  ;; (setq tramp-default-remote-shell "/bin/bash")
   ;; It's less clear that this should be used
   (setq tramp-encoding-shell "/bin/bash")
   )
+;; This actually changes the variable, although poetry still runs with /bin/sh
+(after! tramp-sh
+  (setq! tramp-default-remote-shell "/bin/bash"))
+;; (after! tramp-integration
+;;   (connection-local-set-profile-variables
+;;    'remote-bash
+;;    '((shell-file-name . "/bin/bash")
+;;      (shell-command-switch . "-c")))
+;;   ;; NOTE: What does this do?
+;;   (connection-local-set-profiles
+;;    '(:application tramp :protocol "ssh" :machine "bs-2")
+;;    'remote-bash)
+;;   )
 
 ;; This appears to do the right thing, but currently we're having other issues with
 ;; tramp commands finding the right path.
