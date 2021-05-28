@@ -227,5 +227,3 @@
 
 ;; This seems to break emacs 28
 ;; (require 'trello)
-
-(require 'stats)
