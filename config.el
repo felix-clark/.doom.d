@@ -85,7 +85,9 @@
 
 ;; make terminal appear on the side rather than the bottom.
 ;; To adjust height add ":width <int|float>" to the rule (see documentation).
-(set-popup-rule! "*doom:vterm-popup*" :side 'right)
+(set-popup-rule! "*doom:vterm-popup*"
+  :side 'right
+  :width 0.3)
 
 
 ;; fix for being unable to find "fd" over tramp
