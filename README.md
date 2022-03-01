@@ -2,8 +2,7 @@
 
 ## Building emacs from source
 
-With emacs 28 providing native compilation, it can be significantly faster when the
-`feature/native-comp` branch is built (which has been merged into emacs master).
+With emacs 28 providing native compilation, it can be significantly faster to build from source.
 See [this SO
 page](https://emacs.stackexchange.com/questions/59538/compile-emacs-from-feature-native-comp-gccemacs-branch-on-ubuntu)
 for some examples. Ensure that the flag `--with-native-compilation` is set. Native JSON
@@ -11,6 +10,8 @@ support via jansson is also very useful, so make sure those prerequisites are in
 and detected in the configuration. I recommend using gcc-10, which requires setting
 `CC=gcc-10` before configuration and building. By default, emacs will be installed to
 `/usr/local/`.
+
+[This script may be more useful going forward](https://gitlab.com/mslot/src_installs/-/blob/master/emacs_install_ubuntu.sh).
 
 ## Doom prerequisites
 
